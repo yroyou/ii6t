@@ -6,6 +6,9 @@ on:
 jobs:
   run-container:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
     steps:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
