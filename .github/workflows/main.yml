@@ -1,0 +1,25 @@
+name: Run Docker Container with NET_ADMIN
+
+on:
+  workflow_dispatch: # allows manual triggering
+
+jobs:
+  run-container:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Pull Docker image
+        run: |
+          docker pull yroyou/kyy
+
+      - name: Run Docker container with NET_ADMIN
+        run: |
+          docker run --rm \
+            --cap-add=NET_ADMIN \
+            --device /dev/net/tun \
+            yroyou/kyy
